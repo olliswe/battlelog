@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_102055) do
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
-
+  
   create_table "games", force: :cascade do |t|
     t.date "date"
     t.integer "your_primary_score"
