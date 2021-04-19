@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_18_204215) do
+ActiveRecord::Schema.define(version: 2021_04_19_064833) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,7 +29,9 @@ ActiveRecord::Schema.define(version: 2021_04_18_204215) do
     t.integer "faction_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", default: 1, null: false
     t.index ["faction_id"], name: "index_armies_on_faction_id"
+    t.index ["user_id"], name: "index_armies_on_user_id"
   end
 
   create_table "factions", force: :cascade do |t|
@@ -47,7 +49,11 @@ ActiveRecord::Schema.define(version: 2021_04_18_204215) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", default: 1, null: false
+    t.integer "your_army_id"
+    t.integer "opps_army_id"
+    t.index ["opps_army_id"], name: "index_games_on_opps_army_id"
     t.index ["user_id"], name: "index_games_on_user_id"
+    t.index ["your_army_id"], name: "index_games_on_your_army_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,9 +64,13 @@ ActiveRecord::Schema.define(version: 2021_04_18_204215) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "my_army"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "armies", "users"
+  add_foreign_key "games", "armies", column: "opps_army_id"
+  add_foreign_key "games", "armies", column: "your_army_id"
   add_foreign_key "games", "users"
 end

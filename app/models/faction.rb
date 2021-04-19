@@ -1,3 +1,3 @@
 class Faction < ApplicationRecord
-  has_many :armys, dependent: :destroy
+  has_many :armies, dependent: :destroy
 end

@@ -1,24 +1,26 @@
-# README
+## Endpoints
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+GET /me
+```
 
-Things you may want to cover:
 
-* Ruby version
+```
+GET /me/games
+```
 
-* System dependencies
+```
+POST /me/games
+```
 
-* Configuration
+```
+GET /me/armies
 
-* Database creation
+Filter by my army vs opps
+```
 
-* Database initialization
 
-* How to run the test suite
+```
+GET /me/armies
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
