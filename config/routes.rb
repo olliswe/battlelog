@@ -1,10 +1,22 @@
+require 'devise_token_auth'
+
 Rails.application.routes.draw do
+
+
+
+  # standard devise routes available at /users
+  # NOTE: make sure this comes first!!!
+  devise_for :admin_users, ActiveAdmin::Devise.config
   resources :factions
   resources :armies
-  devise_for :users
-  resources :users
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   resources :games
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  ActiveAdmin.routes(self)
+
+  # token auth routes available at /api/v1/auth
+  namespace :api do
+    scope :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth'
+    end
+  end
+
 end

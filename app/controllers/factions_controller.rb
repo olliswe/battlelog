@@ -1,2 +1,0 @@
-class FactionsController < ApplicationController
-end

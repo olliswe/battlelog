@@ -1,5 +1,7 @@
 ## Endpoints
 
+### /me
+
 ```
 GET /me
 ```
@@ -21,6 +23,9 @@ Filter by my army vs opps
 
 
 ```
-GET /me/armies
+POST /me/armies
 ```
+
+
+### /auth
 
