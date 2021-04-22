@@ -14,10 +14,12 @@ require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require_relative '../lib/selective_stack'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
 
 module Battlelog
   class Application < Rails::Application
@@ -36,10 +38,10 @@ module Battlelog
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Flash
+    config.middleware.use SelectiveStack
+
 
   end
 end
